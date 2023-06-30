@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sales Price Prediction</title>
+</head>
+<body>
+<div style="display: flex;
+  justify-content: center;
+  align-items: center;">
+    <h1>Sales Price Prediction</h1>
+</div>
+<form method="post"   accept-charset="utf-8">
+<!--    Comanier name-->
+    <div style="text-align:center">
+        <label><b>Select Company:</b></label>
+        <select name="company" required="1">
+            {% for i in list_CompanyName %}
+              <option value="{{i}}">{{i}}</option>
+            {% endfor %}</select></div>
+<!--    City name-->
+    <div style="text-align:center">
+        <label><b>Select City:</b></label>
+        <select name="city" required="1">
+            {% for i in list_City %}
+              <option value="{{i}}">{{i}}</option>
+            {% endfor %}</select></div>
+<!--    list_Salesperson-->
+    <div style="text-align:center">
+        <label><b>Salesperson:</b></label>
+        <select name="salesperson" required="1">
+            {% for i in list_Salesperson %}
+              <option value="{{i}}">{{i}}</option>
+            {% endfor %}</select></div>
+<!--    list_Region-->
+    <div style="text-align:center">
+        <label><b>Region:</b></label>
+        <select name="Region" required="1">
+            {% for i in list_Region %}
+              <option value="{{i}}">{{i}}</option>
+            {% endfor %}</select></div>
+<!--    list_ProductName-->
+    <div style="text-align:center">
+        <label><b>ProductName:</b></label>
+        <select name="ProductName" required="1">
+            {% for i in list_ProductName %}
+              <option value="{{i}}">{{i}}</option>
+            {% endfor %}</select></div>
+<!--    list_Category-->
+    <div style="text-align:center">
+        <label><b>list_Category:</b></label>
+        <select name="Category" required="1">
+            {% for i in list_Category %}
+              <option value="{{i}}">{{i}}</option>
+            {% endfor %}</select></div>
+<!--    list_Unit_Price-->
+    <div style="text-align:center">
+        <label><b>Unit_Price:</b></label>
+        <select name="list_Unit_Price" required="1">
+            {% for i in list_Unit_Price %}
+              <option value="{{i}}">{{i}}</option>
+            {% endfor %}</select></div>
+<!--    list_Quantity-->
+    <div style="text-align:center">
+        <label><b>list_Quantity:</b></label>
+        <select name="Quantity" required="1">
+            {% for i in list_Quantity %}
+              <option value="{{i}}">{{i}}</option>
+            {% endfor %}</select></div>
+<!--    list_hour-->
+    <div style="text-align:center">
+        <label><b>list_hour:</b></label>
+        <select name="hour" required="1">
+            {% for i in list_hour %}
+              <option value="{{i}}">{{i}}</option>
+            {% endfor %}</select></div>
+<!--    list_day-->
+    <div style="text-align:center">
+        <label><b>list_day:</b></label>
+        <select name="day" required="1">
+            {% for i in list_day %}
+              <option value="{{i}}">{{i}}</option>
+            {% endfor %}</select></div>
+<!--    list_month-->
+    <div style="text-align:center">
+        <label><b>list_month:</b></label>
+        <select name="month" required="1">
+            {% for i in list_month %}
+              <option value="{{i}}">{{i}}</option>
+            {% endfor %}</select></div>
+<!--    list_year-->
+    <div style="text-align:center">
+        <label><b>list_year:</b></label>
+        <select name="year" required="1">
+            {% for i in list_year %}
+              <option value="{{i}}">{{i}}</option>
+            {% endfor %}</select></div>
+<!--    list_weekday-->
+    <div style="text-align:center">
+        <label><b>list_weekday:</b></label>
+        <select name="weekday" required="1">
+            {% for i in list_weekday %}
+              <option value="{{i}}">{{i}}</option>
+            {% endfor %}</select></div>
+    <div class="but-end" style="text-align:center">
+        <button onclick="send_data()">Predict Price</button>
+    </div>
+</form>
+<div style="text-align:center">
+  <h3><span id="prediction"></span></h3>
+</div>
+<script>
+function form_handler(event){
+event.preventDefault();
+}
+function send_data(){
+ document.querySelector('form').addEventListener('submit',form_handler);
+ var fb=new FormData(document.querySelector('form'));
+ var xhr=new XMLHttpRequest({mozSystem:true});
+ xhr.open('POST','/predict',true);
+ document.getElementById("prediction").innerHTML="wait! Prediction Price...";
+ xhr.onreadystatechange=function(){
+ if(xhr.readyState==XMLHttpRequest.DONE){
+  document.getElementById("prediction").innerHTML="prediction: rs"+xhr.responseText;
+ }
+ }
+ xhr.onload=function(){};
+ xhr.send(fb);
+
+ }
+</script>
+</body>
+</html>
